@@ -48,7 +48,6 @@ namespace CodenameHorror
         List<Rune> rune_list = new List<Rune>();
         List<Soul> soul_list = new List<Soul>();
 
-        public List<Sparker> blood_spout_list = new List<Sparker>();
         public List<Decal> blood_splat_list = new List<Decal>();
         
         List<MonsterSpawner> spawner_list = new List<MonsterSpawner>();
@@ -72,8 +71,9 @@ namespace CodenameHorror
             this.screenHeight = height;
             this.graphics.PreferredBackBufferHeight = screenHeight;
             this.graphics.PreferredBackBufferWidth = screenWidth;
-            player.setPos(new Vector2((player.getPos().X / oldWidth) * screenWidth,
-                          (player.getPos().Y / oldHeight) * screenHeight));
+            foreach (Entity e in full_entity_list)
+                e.setPos(new Vector2((e.getPos().X / oldWidth) * screenWidth,
+                              (e.getPos().Y / oldHeight) * screenHeight));
             viewPort = new Rectangle(0, 0, screenWidth, screenHeight);
             TileMap.ChangeResolution(viewPort.Width, viewPort.Height);
             sparker_list.Clear();
@@ -141,7 +141,7 @@ namespace CodenameHorror
             AssetManager.Health_Bar_Fill = cmgr.Load<Texture2D>("Health_Bar_Fill");
 
             TileMap.spriteSheet = cmgr.Load<Texture2D>("tilesheet");
-            Sparker.particleTex = cmgr.Load<Texture2D>("line");
+            Sparker.lineTex = cmgr.Load<Texture2D>("line");
 
             AssetManager.Rune_Texture_Anchor = cmgr.Load<Texture2D>("Runes\\Soul\\Anchor");
             AssetManager.Rune_Texture_Link = cmgr.Load<Texture2D>("Runes\\Soul\\SoulLinkRune");
@@ -309,7 +309,6 @@ namespace CodenameHorror
             full_entity_list.Add(p);
 
             blood_splat_list.Clear();
-            blood_spout_list.Clear();
 
             sparker_list.Clear();
             rune_list.Clear();
@@ -476,13 +475,6 @@ namespace CodenameHorror
                             sparker_list.RemoveAt(i);
                     }
 
-                    for (int i = 0; i < blood_spout_list.Count; i++)
-                    {
-                        blood_spout_list[i].Update();
-                        if (!blood_spout_list[i].isAlive())
-                            blood_spout_list.RemoveAt(i);
-                    }
-
                     for (int i = 0; i < spawner_list.Count; i++)
                     {
                         spawner_list[i].Update();
@@ -557,8 +549,6 @@ namespace CodenameHorror
                     {
                         e.Render(spriteBatch);
                     }
-                    foreach (Sparker s in blood_spout_list)
-                        s.Draw(spriteBatch);
                     foreach (Sparker s in sparker_list)
                         s.Draw(spriteBatch);
                     break;

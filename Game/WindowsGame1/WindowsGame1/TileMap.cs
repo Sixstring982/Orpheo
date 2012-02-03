@@ -78,7 +78,7 @@ namespace CodenameHorror
                         sb.Draw(spriteSheet, new Rectangle(x * tileWidth,
                                                            y * tileHeight,
                                                            tileWidth, tileHeight),
-                                new Rectangle(spX * 18, spY * 18, 18, 18), Color.White);
+                                new Rectangle(spX * 18, spY * 18, 17, 17), Color.White);
                     }
                 }
             }

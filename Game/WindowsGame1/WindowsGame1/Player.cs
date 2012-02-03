@@ -26,6 +26,7 @@ namespace CodenameHorror
         private List<RuneItem> RuneInventory = new List<RuneItem>();
         private List<Living> linkedSouls = new List<Living>();
         private int keyCount = 0;
+        private Vector2 spawnLocation = Vector2.Zero;
         
 
         public void linkSoul(Living liveEnt)
@@ -58,10 +59,10 @@ namespace CodenameHorror
         public override void damage(int amount, Living.DamageType damageType)
         {
             for (int i = 0; i < linkedSouls.Count; i++)
-                {
-                    linkedSouls[i].damage((int)(0.2 * amount * getRuneAdjustment())/linkedSouls[i].getSoulPower(), damageType);
-                    amount -= (int)(0.2 * amount);
-                }
+            {
+                linkedSouls[i].damage((int)(0.2 * amount * getRuneAdjustment()) / linkedSouls[i].getSoulPower(), damageType);
+                amount -= (int)(0.2 * amount);
+            }
             base.damage(amount, damageType);
         }
 
@@ -240,6 +241,7 @@ namespace CodenameHorror
             {
                 CheckForRoomChange();
                 processInput();
+                base.TakeEnvironmentalDamage();
             }
             return 0;
         }
@@ -251,24 +253,32 @@ namespace CodenameHorror
                 position.X = TileMap.tileWidth * TileMap.MapWidth - 10;
                 Living.gameParent.ChangeRoom(new Vector2(TileMap.tileWidth * TileMap.MapWidth - 10, position.X),
                     Living.gameParent.currentMap.xLoc - 1, Living.gameParent.currentMap.yLoc);
+                spawnLocation.X = position.X;
+                spawnLocation.Y = position.Y;
             }
             else if (position.Y < 1 && position.Y > -290)
             {
                 position.Y = TileMap.tileHeight * TileMap.MapHeight - 10;
                 Living.gameParent.ChangeRoom(new Vector2(TileMap.tileWidth * TileMap.MapWidth - 10, position.X),
                     Living.gameParent.currentMap.xLoc, Living.gameParent.currentMap.yLoc - 1);
+                spawnLocation.X = position.X;
+                spawnLocation.Y = position.Y;
             }
             else if (position.X > Game1.viewPort.Width)
             {
                 position.X = 10;
                 Living.gameParent.ChangeRoom(new Vector2(TileMap.tileWidth * TileMap.MapWidth - 10, position.X),
                     Living.gameParent.currentMap.xLoc + 1, Living.gameParent.currentMap.yLoc);
+                spawnLocation.X = position.X;
+                spawnLocation.Y = position.Y;
             }
             else if (position.Y > Game1.viewPort.Height)
             {
                 position.Y = 10;
                 Living.gameParent.ChangeRoom(new Vector2(TileMap.tileWidth * TileMap.MapWidth - 10, position.X),
                     Living.gameParent.currentMap.xLoc, Living.gameParent.currentMap.yLoc + 1);
+                spawnLocation.X = position.X;
+                spawnLocation.Y = position.Y;
             }
         }
 
@@ -406,10 +416,6 @@ namespace CodenameHorror
 
             prevKeys = Keyboard.GetState();
         }
-        /// <summary>
-        /// new SoulAnchorRune(null, new Vector2(position.X - 64, position.Y), 30.0f, 0, 0), position)
-        /// </summary>
-        /// <param name="movementVector"></param>
 
 
         private void calculateRotation(Vector2 movementVector)
@@ -420,6 +426,7 @@ namespace CodenameHorror
         }
 
         public bool deathFlag = false;
+
         private void die()
         {
             this.renderCode = 7;
@@ -459,7 +466,7 @@ namespace CodenameHorror
                         }
                     }
                     deadTimer = 0;
-                    this.position = new Vector2(TileMap.tileWidth * TileMap.MapWidth / 2, TileMap.tileHeight * TileMap.MapHeight / 2);
+                    this.position = new Vector2(spawnLocation.X, spawnLocation.Y);
                 }
             }
         }
@@ -503,9 +510,8 @@ namespace CodenameHorror
             ri.sparkColor = Color.LemonChiffon;
             RuneInventory.Add(ri);
             speed = 2.0f;
-            
 
-
+            spawnLocation = new Vector2(position.X, position.Y);
         }
 
         public void drawRune(int code)

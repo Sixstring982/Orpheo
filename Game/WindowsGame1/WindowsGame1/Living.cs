@@ -46,13 +46,9 @@ namespace CodenameHorror
             return soulPower;
         }
 
-
-
-
         public virtual void damage(int amount, DamageType type)
         {
             bool canTakeDamage = true;
-            
 
             for (int i = 0; i < damageIndicators.Count; i++)
             {
@@ -76,11 +72,10 @@ namespace CodenameHorror
             before taking damage*/
             if (canTakeDamage)
             {
-                Living.gameParent.blood_spout_list.Add(new Sparker(((amount % 30) + 5),
+                Living.gameParent.GetSparkerList().Add(new Sparker((50),
                 new Vector2(position.X - 32, position.Y - 32), false, 0, 0, Decal.gibFactory()));
 
                 Living.gameParent.blood_splat_list.Add(new Decal(Decal.decalFactory(), new Vector2(position.X - 32, position.Y - 32)));
-                if (health <= 0) canTakeDamage = false;
 
                 health -= amount;
                 if (health < 0) health = 0;
@@ -89,11 +84,11 @@ namespace CodenameHorror
                 di.liveTime = 1;
                 di.source.X = base.position.X;
                 di.source.Y = base.position.Y - 64;
-                damageIndicators.Add(di);
                 if (this is Player)
                     di.color = Color.Red;
                 else
                     di.color = Color.Yellow;
+                damageIndicators.Add(di);
             }
         }
 
@@ -106,9 +101,6 @@ namespace CodenameHorror
         
         protected void move(Vector2 newVect)
         {
-            
-            
-            
             int midY = (int)((this.position.Y - 32) / TileMap.tileHeight);
             if (midY < 0) midY = 0;
             this.position.X += newVect.X;
@@ -166,8 +158,12 @@ namespace CodenameHorror
 
             if (moveX) this.position.X += newVect.X;
 
-            midX = (int)((this.position.X - 32) / TileMap.tileWidth);
-            midY = (int)((this.position.Y - 32) / TileMap.tileHeight);
+        }
+
+        public void TakeEnvironmentalDamage()
+        {
+            int midX = (int)((this.position.X - 32) / TileMap.tileWidth);
+            int midY = (int)((this.position.Y - 32) / TileMap.tileHeight);
             if (midY < 0) midY = 0;
             if (midX < 0) midX = 0;
             onID = gameParent.currentMap.data[midX][midY][1];
@@ -207,7 +203,6 @@ namespace CodenameHorror
                     }
                     break;
             }
-            
         }
 
         public Living(AnimManager manager, Vector2 position, float _collideRadius)

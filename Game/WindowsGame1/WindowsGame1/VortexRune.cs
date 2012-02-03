@@ -36,7 +36,7 @@ namespace CodenameHorror
                 if (Vector2.Distance(ent.getPos(), this.position) < activationDistance)
                 {
                     ((Living)ent).damage(5000, Living.DamageType.Burn);
-                    Living.gameParent.blood_spout_list.Add(new Sparker(100,
+                    Living.gameParent.GetSparkerList().Add(new Sparker(100,
                 new Vector2(position.X - 32, position.Y - 32), false, 0, 0, Decal.gibFactory()));
                 }
             }

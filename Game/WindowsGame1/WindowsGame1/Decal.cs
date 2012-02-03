@@ -23,7 +23,6 @@ namespace CodenameHorror
         {
             this.decal =  decal;
             this.position = position;
-
         }
 
 

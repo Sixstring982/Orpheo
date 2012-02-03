@@ -25,7 +25,8 @@ namespace CodenameHorror
         private int maxSparks;
         private Vector2 location;
         private const float gravity = 0.1f;
-        public static Texture2D particleTex;
+        public static Texture2D lineTex;
+        private Texture2D particleTex;
         private Color grad1 = Color.Red, grad2 = Color.Yellow;
         private bool autoFire = false;
         private int afDelay = 0;
@@ -38,6 +39,7 @@ namespace CodenameHorror
         public Sparker(int intensity, Vector2 location, bool autoFire = false, int autoFireDelay = 0, int afinitdelay = 0,
                        Texture2D tex = null)
         {
+            particleTex = lineTex;
             if(tex != null) particleTex = tex;
             this.autoFire = autoFire;
             this.afDelay = autoFireDelay;
