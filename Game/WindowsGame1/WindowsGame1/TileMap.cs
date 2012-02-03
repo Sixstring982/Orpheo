@@ -60,8 +60,8 @@ namespace CodenameHorror
 
         public static void ChangeResolution(int width, int height)
         {
-            tileWidth = Game1.viewPort.Width / MapWidth;
-            tileHeight = Game1.viewPort.Height / MapHeight;
+            tileWidth = (int)((float)width / MapWidth);
+            tileHeight = (int)((float)height / MapHeight);
         }
 
         public void Draw(SpriteBatch sb)

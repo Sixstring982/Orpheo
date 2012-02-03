@@ -57,10 +57,7 @@ namespace CodenameHorror
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            this.graphics.PreferredBackBufferHeight = screenHeight;
-            this.graphics.PreferredBackBufferWidth = screenWidth;
-            viewPort = new Rectangle(0, 0, screenWidth, screenHeight);
-            TileMap.ChangeResolution(viewPort.Width, viewPort.Height);
+            ChangeResolution(screenWidth, screenHeight);
         }
 
         public void ChangeResolution(int width, int height)
@@ -69,13 +66,15 @@ namespace CodenameHorror
             int oldHeight = screenHeight;
             this.screenWidth = width;
             this.screenHeight = height;
+            TileMap.ChangeResolution(screenWidth, screenHeight);
+            screenWidth -= screenWidth % TileMap.tileWidth;
+            screenHeight -= screenHeight % TileMap.tileHeight;
             this.graphics.PreferredBackBufferHeight = screenHeight;
             this.graphics.PreferredBackBufferWidth = screenWidth;
             foreach (Entity e in full_entity_list)
                 e.setPos(new Vector2((e.getPos().X / oldWidth) * screenWidth,
                               (e.getPos().Y / oldHeight) * screenHeight));
             viewPort = new Rectangle(0, 0, screenWidth, screenHeight);
-            TileMap.ChangeResolution(viewPort.Width, viewPort.Height);
             sparker_list.Clear();
             GenerateLavaSparkers();
             spawner_list.Clear();
