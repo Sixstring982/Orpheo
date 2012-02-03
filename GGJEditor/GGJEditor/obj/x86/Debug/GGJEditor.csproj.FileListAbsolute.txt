@@ -1,0 +1,20 @@
+c:\users\odowd.451\documents\visual studio 2010\Projects\GGJEditor\GGJEditor\bin\Debug\GGJEditor.exe
+c:\users\odowd.451\documents\visual studio 2010\Projects\GGJEditor\GGJEditor\bin\Debug\GGJEditor.pdb
+c:\users\odowd.451\documents\visual studio 2010\Projects\GGJEditor\GGJEditor\obj\x86\Debug\ResolveAssemblyReference.cache
+c:\users\odowd.451\documents\visual studio 2010\Projects\GGJEditor\GGJEditor\obj\x86\Debug\GGJEditor.Form1.resources
+c:\users\odowd.451\documents\visual studio 2010\Projects\GGJEditor\GGJEditor\obj\x86\Debug\GGJEditor.Properties.Resources.resources
+c:\users\odowd.451\documents\visual studio 2010\Projects\GGJEditor\GGJEditor\obj\x86\Debug\GenerateResource.read.1.tlog
+c:\users\odowd.451\documents\visual studio 2010\Projects\GGJEditor\GGJEditor\obj\x86\Debug\GenerateResource.write.1.tlog
+c:\users\odowd.451\documents\visual studio 2010\Projects\GGJEditor\GGJEditor\obj\x86\Debug\GGJEditor.exe
+c:\users\odowd.451\documents\visual studio 2010\Projects\GGJEditor\GGJEditor\obj\x86\Debug\GGJEditor.pdb
+c:\users\odowd.451\documents\visual studio 2010\Projects\GGJEditor\GGJEditor\obj\x86\Debug\GGJEditor.WorldPicker.resources
+\\158-108-PC03\hq\GameJam\GGJEditor\GGJEditor\obj\x86\Debug\GGJEditor.exe
+\\158-108-PC03\hq\GameJam\GGJEditor\GGJEditor\obj\x86\Debug\GGJEditor.pdb
+\\158-108-PC03\hq\GameJam\GGJEditor\GGJEditor\bin\Debug\GGJEditor.exe
+\\158-108-PC03\hq\GameJam\GGJEditor\GGJEditor\obj\x86\Debug\ResolveAssemblyReference.cache
+\\158-108-PC03\hq\GameJam\GGJEditor\GGJEditor\obj\x86\Debug\GGJEditor.Form1.resources
+\\158-108-PC03\hq\GameJam\GGJEditor\GGJEditor\obj\x86\Debug\GGJEditor.Properties.Resources.resources
+\\158-108-PC03\hq\GameJam\GGJEditor\GGJEditor\obj\x86\Debug\GGJEditor.WorldPicker.resources
+\\158-108-PC03\hq\GameJam\GGJEditor\GGJEditor\obj\x86\Debug\GenerateResource.read.1.tlog
+\\158-108-PC03\hq\GameJam\GGJEditor\GGJEditor\obj\x86\Debug\GenerateResource.write.1.tlog
+\\158-108-PC03\hq\GameJam\GGJEditor\GGJEditor\bin\Debug\GGJEditor.pdb

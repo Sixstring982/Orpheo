@@ -1,0 +1,10 @@
+\\158-108-PC03\hq\GameJam\GGJEditor\GGJEditor\obj\x86\Release\ResolveAssemblyReference.cache
+\\158-108-PC03\hq\GameJam\GGJEditor\GGJEditor\obj\x86\Release\GGJEditor.Form1.resources
+\\158-108-PC03\hq\GameJam\GGJEditor\GGJEditor\obj\x86\Release\GGJEditor.Properties.Resources.resources
+\\158-108-PC03\hq\GameJam\GGJEditor\GGJEditor\obj\x86\Release\GGJEditor.WorldPicker.resources
+\\158-108-PC03\hq\GameJam\GGJEditor\GGJEditor\obj\x86\Release\GenerateResource.read.1.tlog
+\\158-108-PC03\hq\GameJam\GGJEditor\GGJEditor\obj\x86\Release\GenerateResource.write.1.tlog
+\\158-108-PC03\hq\GameJam\GGJEditor\GGJEditor\bin\Release\GGJEditor.exe
+\\158-108-PC03\hq\GameJam\GGJEditor\GGJEditor\bin\Release\GGJEditor.pdb
+\\158-108-PC03\hq\GameJam\GGJEditor\GGJEditor\obj\x86\Release\GGJEditor.exe
+\\158-108-PC03\hq\GameJam\GGJEditor\GGJEditor\obj\x86\Release\GGJEditor.pdb
