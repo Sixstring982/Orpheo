@@ -58,7 +58,8 @@ namespace CodenameHorror
             if (placeTimer < 20)
             {
                 placeTimer++;
-                canvas.Draw(tex, new Rectangle((int)position.X, (int)position.Y, (int)(tex.Width * (placeTimer / 20.0)), (int)(tex.Height * (placeTimer / 20.0))), Color.White);
+                canvas.Draw(tex, new Rectangle((int)(position.X + 32 - (32 * (placeTimer / 20.0))), (int)(position.Y + 32 - (32 * (placeTimer / 20.0))),
+                    (int)(tex.Width * (placeTimer / 20.0)), (int)(tex.Height * (placeTimer / 20.0))), Color.White);
             }
             else
                 canvas.Draw(tex, new Rectangle((int)position.X, (int)position.Y, tex.Width, tex.Height), Color.White);

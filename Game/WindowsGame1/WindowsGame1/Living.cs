@@ -168,6 +168,7 @@ namespace CodenameHorror
                 case 0x48:
                 case 0x49:
                 case 0x4a:
+                    if (!(this is Cherub))
                     damage(10, DamageType.Spike);
                     break;
                 case 0x30:
@@ -189,7 +190,8 @@ namespace CodenameHorror
                 case 0x43:
                 case 0x44:
                 case 0x45:
-                    damage(5, DamageType.Burn);
+                    if(!(this is Cherub))
+                        damage(5, DamageType.Burn);
                     break;
                 case 0x77:
                     if (this is Player)

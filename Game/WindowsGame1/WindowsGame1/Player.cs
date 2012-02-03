@@ -222,10 +222,6 @@ namespace CodenameHorror
                                         
                                         if(Vector2.Distance(spot, e.getPos()) <= 32)
                                             ((Living)e).damage(80, DamageType.Blunt);
-
-                                    
-
-
                                 }
                             }
                         }
@@ -354,22 +350,21 @@ namespace CodenameHorror
             {
                 Vector2 oldPlacement = new Vector2(position.X - 64, position.Y);
 
+                int midY = (int)((this.position.Y + 32) / TileMap.tileHeight);
+                int midX = (int)((this.position.X - 32) / TileMap.tileWidth);
+
+                if (gameParent.currentMap.data[midX][midY][2] == 0xFF)
+                    Living.gameParent.PlaceRune(RuneInventory[selectedRune].rune, oldPlacement, RuneInventory[selectedRune].sparkColor);
                 /*This is really really broken.
                 
                 Vector2 newPlacement = new Vector2(position.X - unitVectorRotation.X, position.Y - unitVectorRotation.Y);
 
 
-                int midY = (int)((this.position.Y - 32) / TileMap.tileHeight);
-                int midX = (int)((this.position.X - 32) / TileMap.tileWidth);
-
-                if (gameParent.currentMap.data[midX][midY][2] == 0xFF) //THIS is sexier
 
                 //This code is soo much sexyer, because it gets rid of possible bugs involving adding runes onto Level 3 Tiles
                 //Vector2 sexyPlacement = new Vector2(position.X - 64, position.Y - 64);
                 //no it isnt. all this does it move it to a corner, which is awful in every way.
                 */
-
-                Living.gameParent.PlaceRune(RuneInventory[selectedRune].rune, oldPlacement, RuneInventory[selectedRune].sparkColor);
             }
             if (keyState.IsKeyDown(Keys.J) &&
                 !prevKeys.IsKeyDown(Keys.J))//Soul down
@@ -463,7 +458,7 @@ namespace CodenameHorror
                             this.position.Y += 64;
                             Living.gameParent.GetRuneList().RemoveAt(i);
                             Sparker sp = new Sparker(100, new Vector2(position.X - 32, position.Y));
-                            sp.SetGradient(new Color(0xFF, 0x0, 0xFF, 0xFF), new Color(0xFF, 0x0, 0xFF, 0xFF));
+                            sp.SetGradient(Color.Multiply(Color.Magenta, 0.5f), Color.White);
                             sp.Fire();
                             Living.gameParent.GetSparkerList().Add(sp);
                             deadTimer = 0;
@@ -518,11 +513,6 @@ namespace CodenameHorror
 
             spawnLocation = new Vector2(position.X, position.Y);
         }
-
-        public void drawRune(int code)
-        {
-
-        }
 	
 	    public int getSoulValue()
         {
@@ -532,7 +522,5 @@ namespace CodenameHorror
 	    public int getRuneAdjustment(){
 		    return soulPower/soulCount;
 	    }
-	
-	
     }
 }

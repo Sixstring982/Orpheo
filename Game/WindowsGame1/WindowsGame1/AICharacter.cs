@@ -111,34 +111,6 @@ namespace CodenameHorror
             rotation = (float)Math.Atan2(angle.X, angle.Y) * -1;
             move(angle);
         }
-
-        /*public void moveTowards()
-        {
-            float tmpSpeed = speed;
-            if (frozen)
-            {
-                speed = frozenSpeed;
-            }
-            float xdist = position.X - target.getPos().X;
-            float ydist = position.Y - target.getPos().Y;
-            float pdist = (float)Math.Sqrt(xdist * xdist + ydist * ydist);
-            if (pdist < reach)
-            {
-                target.damage(10, DamageType.Blunt);
-                return;
-            }
-            Vector2 angle = new Vector2(xdist, ydist);
-            angle.Normalize();
-            angle.X *= -speed;
-            angle.Y *= -speed;
-            rotation = (float)Math.Atan2(angle.X, angle.Y) * -1;
-            move(angle);
-            if (frozen)
-            {
-                speed = tmpSpeed;
-                frozen = false;
-            }
-        }*/
     }
 
 }

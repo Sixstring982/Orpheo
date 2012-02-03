@@ -17,7 +17,7 @@ namespace CodenameHorror
         public Cherub(AnimManager manager, Vector2 position)
             : base(manager, position, 26f)
         {
-            health = 10;
+            health = 50;
             speed = 3.1f;
             damageDealt = 60;
         }

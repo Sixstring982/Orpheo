@@ -34,6 +34,10 @@ namespace CodenameHorror
                 {
                     ((Living)activator).damage(ATTACK_DAMAGE * this.powerLevel, Living.DamageType.Spike);
                     this.acted = true;
+                    Sparker s = new Sparker(100, new Vector2(position.X + 32, position.Y + 32));
+                    s.SetGradient(Color.Yellow, Color.DarkGray);
+                    s.Fire();
+                    Living.gameParent.GetSparkerList().Add(s);
                 }
             }
         }
