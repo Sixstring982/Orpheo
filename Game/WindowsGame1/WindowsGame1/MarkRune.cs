@@ -13,7 +13,6 @@ namespace CodenameHorror
         public MarkRune(Player p, AnimManager manager, Vector2 position, float collideRadius, int rechargeTime, int powerLevel)
             : base(AssetManager.Rune_Texture_Mark, position, collideRadius, rechargeTime, powerLevel)
         {
-            p.teleportMarker = this;
         }
 
         public override void activated(Entity e)
@@ -24,7 +23,6 @@ namespace CodenameHorror
         public override int update(int code)
         {
             return 0;
-
         }
     }
 }

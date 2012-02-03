@@ -462,8 +462,11 @@ namespace CodenameHorror
 
                     for (int i = 0; i < rune_list.Count; i++)
                     {
-                        int status = rune_list[i].update(0);
-                        if (status == 1) rune_list.RemoveAt(i);
+                        if (rune_list[i].update(0) == 1)
+                        {
+                            rune_list.RemoveAt(i);
+                            player.RebuildRuneInventory();
+                        }
                     }
 
                     for (int i = 0; i < sparker_list.Count; i++)

@@ -12,13 +12,12 @@ namespace CodenameHorror
 {
     public class Player : Living{
 	    private int soulCount = 1;
-        public MarkRune teleportMarker = null;
         private int deadTimer = 0;
         private int attackTimer = 0;
         private int selectedRune = 0;
         private float reach = 50.0f;
         private AttackType currentAttack = AttackType.None;
-        private class RuneItem
+        public class RuneItem
         {
             public Rune rune;
             public Color sparkColor;
@@ -471,16 +470,15 @@ namespace CodenameHorror
             }
         }
 
-	    public Player(AnimManager manager, Vector2 position, float _collideRadius) : base(manager, position, _collideRadius)
+        public void RebuildRuneInventory()
         {
-            health = 100;
-
+            RuneInventory.Clear();
             RuneItem ri = new RuneItem();
             ri.rune = new SoulAnchorRune(null, Vector2.Zero, 0.0f, 20, 10);
             ri.sparkColor = Color.White;
             RuneInventory.Add(ri);
 
-            
+
             ri = new RuneItem();
             ri.rune = new MarkRune(this, null, Vector2.Zero, 32f, 0, this.getRuneAdjustment());
             ri.sparkColor = Color.Red;
@@ -510,7 +508,17 @@ namespace CodenameHorror
             ri.sparkColor = Color.LemonChiffon;
             RuneInventory.Add(ri);
             speed = 2.0f;
+        }
 
+        public List<RuneItem> getRuneInventory()
+        {
+            return RuneInventory;
+        }
+
+	    public Player(AnimManager manager, Vector2 position, float _collideRadius) : base(manager, position, _collideRadius)
+        {
+            health = 100;
+            RebuildRuneInventory();
             spawnLocation = new Vector2(position.X, position.Y);
         }
 	

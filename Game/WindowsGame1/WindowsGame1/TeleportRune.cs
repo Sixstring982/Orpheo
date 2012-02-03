@@ -20,15 +20,22 @@ namespace CodenameHorror
 
         public override int update(int code)
         {
-      
             return 0;
         }
 
         public override void activated(Entity activator)
         {
-            if (boss.teleportMarker == null) return;
-            activator.setPos(new Vector2(boss.teleportMarker.getPos().X + 64,
-                boss.teleportMarker.getPos().Y + 64));
+            MarkRune m = null;
+            for(int i = 0; i < Living.gameParent.GetRuneList().Count; i++)
+            {
+                if(Living.gameParent.GetRuneList()[i] is MarkRune)
+                {
+                    m = (MarkRune)Living.gameParent.GetRuneList()[i];
+                    break;
+                }
+            }
+            if (m != null) return;
+            activator.setPos(new Vector2(m.getPos().X + 64, m.getPos().Y + 64));
 
             Sparker s = new Sparker(50, new Vector2(activator.getPos().X - 32,
                     activator.getPos().Y - 32));
