@@ -42,11 +42,5 @@ namespace CodenameHorror
             }
             startupTimer = 45;
         }
-
-
-        public override void Render(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(AssetManager.Rune_Texture_Vortex, Living.getFuckingOffset(position), Color.White);
-        }
     }
 }

@@ -26,15 +26,15 @@ namespace CodenameHorror
 
         public override void activated(Entity activator)
         {
-                if (boss.teleportMarker == null) return;
-                activator.setPos(boss.teleportMarker.getPos());
-                
-                //Do something to draw particle effect at this point.
-            
-        }
-        public override void Render(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(AssetManager.Rune_Texture_Teleport, Living.getFuckingOffset(position), Color.White);
+            if (boss.teleportMarker == null) return;
+            activator.setPos(new Vector2(boss.teleportMarker.getPos().X + 64,
+                boss.teleportMarker.getPos().Y + 64));
+
+            Sparker s = new Sparker(50, new Vector2(activator.getPos().X - 32,
+                    activator.getPos().Y - 32));
+            s.SetGradient(Color.Magenta, Color.Maroon);
+            s.Fire();
+            Living.gameParent.GetSparkerList().Add(s);
         }
     }
 }

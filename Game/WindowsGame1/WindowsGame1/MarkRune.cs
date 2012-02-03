@@ -26,14 +26,5 @@ namespace CodenameHorror
             return 0;
 
         }
-
-        public override void Render(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(AssetManager.Rune_Texture_Mark, Living.getFuckingOffset(position), Color.White);
-        }
-
-
-
-
     }
 }

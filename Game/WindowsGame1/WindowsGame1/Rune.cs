@@ -45,6 +45,8 @@ namespace CodenameHorror
 
 	    public Rune(Texture2D tex, Vector2 position, float _collideRadius, int _rechargeTime, int _powerLevel) : base(null, position, _collideRadius)
         {
+            this.position.X = position.X;
+            this.position.Y = position.Y;
 		    this.rechargeTime = _rechargeTime;
             this.powerLevel = _powerLevel;
             this.tex = tex;

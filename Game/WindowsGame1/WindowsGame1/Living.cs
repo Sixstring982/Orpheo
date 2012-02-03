@@ -12,10 +12,6 @@ namespace CodenameHorror
 {
     public abstract class Living : Entity
     {
-        public static Vector2 getFuckingOffset(Vector2 position)
-        {
-            return new Vector2(position.X - 64, position.Y - 64);
-        }
 
         public static Game1 gameParent;
         private class DamageIndicator
@@ -75,7 +71,7 @@ namespace CodenameHorror
                 Living.gameParent.GetSparkerList().Add(new Sparker((50),
                 new Vector2(position.X - 32, position.Y - 32), false, 0, 0, Decal.gibFactory()));
 
-                Living.gameParent.blood_splat_list.Add(new Decal(Decal.decalFactory(), new Vector2(position.X - 32, position.Y - 32)));
+                Living.gameParent.blood_splat_list.Add(new Decal(Decal.decalFactory(), new Vector2(position.X - 64, position.Y - 64)));
 
                 health -= amount;
                 if (health < 0) health = 0;

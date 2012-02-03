@@ -26,14 +26,7 @@ namespace CodenameHorror
             if (ent is Living && !(ent is Player))
             {
                ((Living)ent).freeze(this.powerLevel);
-
             }
-        }
-
-
-        public override void Render(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(AssetManager.Rune_Texture_Freeze, Living.getFuckingOffset(position), Color.White);
         }
     }
 }

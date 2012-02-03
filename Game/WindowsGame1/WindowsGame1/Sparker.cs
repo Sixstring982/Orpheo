@@ -12,7 +12,7 @@ namespace CodenameHorror
 {
     public class Sparker
     {
-        private const double maxSparkSpeed = 4.0;
+        private const double maxSparkSpeed = 2.0;
 
         class Spark
         {
@@ -24,7 +24,7 @@ namespace CodenameHorror
         private List<Spark> sparks = new List<Spark>();
         private int maxSparks;
         private Vector2 location;
-        private const float gravity = 0.1f;
+        private const float gravity = 0.02f;
         public static Texture2D lineTex;
         private Texture2D particleTex;
         private Color grad1 = Color.Red, grad2 = Color.Yellow;
@@ -66,7 +66,7 @@ namespace CodenameHorror
                 double rotation = Math.PI / 2;
                 double colorMix = rand.NextDouble();
                 Color c = new Color();
-                c.A = 0xFF;
+                c.A = (byte)(rand.Next() & 0xff);
                 c.R = (byte)((colorMix * grad1.R) + ((1 - colorMix) * grad2.R));
                 c.B = (byte)((colorMix * grad1.B) + ((1 - colorMix) * grad2.B));
                 c.G = (byte)((colorMix * grad1.G) + ((1 - colorMix) * grad2.G));
@@ -104,12 +104,11 @@ namespace CodenameHorror
                     sparks[i].position.Y += sparks[i].velocity.Y;
                     sparks[i].velocity.Y += gravity;
                     sparks[i].color.A--;
-                    if (sparks[i].color.A == 255) sparks[i].color.A = 0;
                 }
                 life++;
                 if (life > 100)
                 {
-                    sparks = new List<Spark>();
+                    sparks.Clear();
                     life = 0;
                 }
             }

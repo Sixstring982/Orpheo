@@ -185,7 +185,7 @@ namespace CodenameHorror
             rune.setPos(position);
             rune_list.Add(rune);
             Sparker sp = new Sparker(100, new Vector2(position.X + 32, position.Y + 32));
-            sp.SetGradient(sparkColor, Color.Multiply(sparkColor, 0.5f));
+            sp.SetGradient(sparkColor, Color.Multiply(sparkColor, 0.2f));
             sp.Fire();
             Living.gameParent.GetSparkerList().Add(sp);
         }
@@ -464,7 +464,6 @@ namespace CodenameHorror
                     {
                         int status = rune_list[i].update(0);
                         if (status == 1) rune_list.RemoveAt(i);
-
                     }
 
                     for (int i = 0; i < sparker_list.Count; i++)
@@ -490,6 +489,14 @@ namespace CodenameHorror
                     if (player.deathFlag)
                     {
                         curGameState = GameState.Died;
+                    }
+
+                    /*Cleanup*/
+                    if (blood_splat_list.Count > 50)
+                    {
+                        int extraBloods = blood_splat_list.Count - 50;
+                        for (int i = 0; i < extraBloods; i++)
+                            blood_splat_list.RemoveAt(i);
                     }
 
 

@@ -66,13 +66,13 @@ namespace CodenameHorror
             base.damage(amount, damageType);
         }
 
+        private Color renderMenuAlpha = new Color(0xff, 0xff, 0xff, 0x80);
         public override void Render(SpriteBatch canvas)
         {
-
             base.Render(canvas);
             //canvas.DrawString(Living.DamageFont, string.Format("{0:0}", selectedRune), new Vector2(22, 22), Color.Black);
             //canvas.DrawString(Living.DamageFont, string.Format("{0:0}", selectedRune), new Vector2(20, 20), Color.White);
-            canvas.Draw(AssetManager.InventoryBackground, new Vector2(0, 0), Color.White);
+            canvas.Draw(AssetManager.InventoryBackground, new Vector2(0, 0), renderMenuAlpha);
             Vector2 runeTexPos = new Vector2(1, 1);
             for(int i=0;i<RuneInventory.Count;i++){
                 RuneItem ri = RuneInventory[i];
@@ -80,7 +80,10 @@ namespace CodenameHorror
                 Color drawColor = Color.DarkGray;
                 if(i == selectedRune) drawColor = Color.White;
                 if(runeTex != null)
+                {
+                    drawColor.A = renderMenuAlpha.A;
                     canvas.Draw(runeTex, runeTexPos, drawColor);
+                }
                 runeTexPos.X += 64;
             }
 
@@ -113,7 +116,7 @@ namespace CodenameHorror
 
             foreach (Rune r in Living.gameParent.GetRuneList())
             {
-                if (Vector2.Distance(r.getPos(), position) < r.getCollideRadius())
+                if (Vector2.Distance(new Vector2(r.getPos().X + 64, r.getPos().Y + 64), position) < r.getCollideRadius())
                 {
                     r.activated(this);
                 }
@@ -349,8 +352,9 @@ namespace CodenameHorror
             if (keyState.IsKeyDown(Keys.K) &&
                 !prevKeys.IsKeyDown(Keys.K))//Soul use
             {
-                //Vector2 oldPlacement = new Vector2(position.X - 64, position.Y);
+                Vector2 oldPlacement = new Vector2(position.X - 64, position.Y);
 
+                /*This is really really broken.
                 
                 Vector2 newPlacement = new Vector2(position.X - unitVectorRotation.X, position.Y - unitVectorRotation.Y);
 
@@ -363,8 +367,9 @@ namespace CodenameHorror
                 //This code is soo much sexyer, because it gets rid of possible bugs involving adding runes onto Level 3 Tiles
                 //Vector2 sexyPlacement = new Vector2(position.X - 64, position.Y - 64);
                 //no it isnt. all this does it move it to a corner, which is awful in every way.
+                */
 
-                Living.gameParent.PlaceRune(RuneInventory[selectedRune].rune, newPlacement, RuneInventory[selectedRune].sparkColor);
+                Living.gameParent.PlaceRune(RuneInventory[selectedRune].rune, oldPlacement, RuneInventory[selectedRune].sparkColor);
             }
             if (keyState.IsKeyDown(Keys.J) &&
                 !prevKeys.IsKeyDown(Keys.J))//Soul down
