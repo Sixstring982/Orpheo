@@ -1,2 +1,3 @@
 c:\users\odowd.451\documents\visual studio 2010\Projects\WindowsGame1\WindowsGame1\WindowsGame1Content\obj\x86\Debug\ResolveAssemblyReference.cache
 \\158-108-PC03\hq\GameJam\Game\WindowsGame1\WindowsGame1Content\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\tsmall\git\Orpheo\Game\WindowsGame1\WindowsGame1Content\obj\x86\Debug\ResolveAssemblyReference.cache

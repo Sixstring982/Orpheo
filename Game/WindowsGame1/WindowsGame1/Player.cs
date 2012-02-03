@@ -248,26 +248,26 @@ namespace CodenameHorror
         {
             if (position.X < 0 && position.X > -290)
             {
-                position.X = TileMap.tileSize * TileMap.MapWidth - 10;
-                Living.gameParent.ChangeRoom(new Vector2(TileMap.tileSize * TileMap.MapWidth - 10, position.X),
+                position.X = TileMap.tileWidth * TileMap.MapWidth - 10;
+                Living.gameParent.ChangeRoom(new Vector2(TileMap.tileWidth * TileMap.MapWidth - 10, position.X),
                     Living.gameParent.currentMap.xLoc - 1, Living.gameParent.currentMap.yLoc);
             }
             else if (position.Y < 1 && position.Y > -290)
             {
-                position.Y = TileMap.tileSize * TileMap.MapHeight - 10;
-                Living.gameParent.ChangeRoom(new Vector2(TileMap.tileSize * TileMap.MapWidth - 10, position.X),
+                position.Y = TileMap.tileHeight * TileMap.MapHeight - 10;
+                Living.gameParent.ChangeRoom(new Vector2(TileMap.tileWidth * TileMap.MapWidth - 10, position.X),
                     Living.gameParent.currentMap.xLoc, Living.gameParent.currentMap.yLoc - 1);
             }
-            else if (position.X > TileMap.tileSize * TileMap.MapWidth)
+            else if (position.X > Game1.viewPort.Width)
             {
                 position.X = 10;
-                Living.gameParent.ChangeRoom(new Vector2(TileMap.tileSize * TileMap.MapWidth - 10, position.X),
+                Living.gameParent.ChangeRoom(new Vector2(TileMap.tileWidth * TileMap.MapWidth - 10, position.X),
                     Living.gameParent.currentMap.xLoc + 1, Living.gameParent.currentMap.yLoc);
             }
-            else if (position.Y > TileMap.tileSize * TileMap.MapHeight)
+            else if (position.Y > Game1.viewPort.Height)
             {
                 position.Y = 10;
-                Living.gameParent.ChangeRoom(new Vector2(TileMap.tileSize * TileMap.MapWidth - 10, position.X),
+                Living.gameParent.ChangeRoom(new Vector2(TileMap.tileWidth * TileMap.MapWidth - 10, position.X),
                     Living.gameParent.currentMap.xLoc, Living.gameParent.currentMap.yLoc + 1);
             }
         }
@@ -345,8 +345,8 @@ namespace CodenameHorror
                 Vector2 newPlacement = new Vector2(position.X - unitVectorRotation.X, position.Y - unitVectorRotation.Y);
 
 
-                int midY = (int)((this.position.Y - 32) / TileMap.tileSize);
-                int midX = (int)((this.position.X - 32) / TileMap.tileSize);
+                int midY = (int)((this.position.Y - 32) / TileMap.tileHeight);
+                int midX = (int)((this.position.X - 32) / TileMap.tileWidth);
 
                 if (gameParent.currentMap.data[midX][midY][2] == 0xFF) //THIS is sexier
 
@@ -364,6 +364,12 @@ namespace CodenameHorror
             }
 
             { 
+            }
+
+            if (keyState.IsKeyDown(Keys.O) &&
+                prevKeys.IsKeyDown(Keys.O))
+            {
+                Living.gameParent.ChangeResolution(800, 600);
             }
 
             if (keyState.IsKeyDown(Keys.W))    //North
@@ -412,6 +418,7 @@ namespace CodenameHorror
             rotation = (float)Math.Atan2(movementVector.X, movementVector.Y)*-1;
             //rotation = MathHelper.ToDegrees((float)rad);
         }
+
         public bool deathFlag = false;
         private void die()
         {
@@ -452,7 +459,7 @@ namespace CodenameHorror
                         }
                     }
                     deadTimer = 0;
-                    this.position = new Vector2(TileMap.tileSize * TileMap.MapWidth / 2, TileMap.tileSize * TileMap.MapHeight / 2);
+                    this.position = new Vector2(TileMap.tileWidth * TileMap.MapWidth / 2, TileMap.tileHeight * TileMap.MapHeight / 2);
                 }
             }
         }

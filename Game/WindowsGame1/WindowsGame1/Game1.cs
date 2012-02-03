@@ -23,6 +23,9 @@ namespace CodenameHorror
         private KeyboardState prevKeyState;
         private MouseState mState;
         private MouseState prevMState;
+        public static Rectangle viewPort;
+        private int screenWidth = 1280;
+        private int screenHeight = 720;
 
         public TileMap currentMap = TileMap.LoadMap(7, 2,TileMap.Dimension.Overworld);
 
@@ -35,7 +38,6 @@ namespace CodenameHorror
             Instructions2 = 3,
             Game = 4,
             Died = 5
-
         }
 
 
@@ -56,8 +58,29 @@ namespace CodenameHorror
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            this.graphics.PreferredBackBufferHeight = TileMap.tileSize * TileMap.MapHeight;
-            this.graphics.PreferredBackBufferWidth = TileMap.tileSize * TileMap.MapWidth;
+            this.graphics.PreferredBackBufferHeight = screenHeight;
+            this.graphics.PreferredBackBufferWidth = screenWidth;
+            viewPort = new Rectangle(0, 0, screenWidth, screenHeight);
+            TileMap.ChangeResolution(viewPort.Width, viewPort.Height);
+        }
+
+        public void ChangeResolution(int width, int height)
+        {
+            int oldWidth = screenWidth;
+            int oldHeight = screenHeight;
+            this.screenWidth = width;
+            this.screenHeight = height;
+            this.graphics.PreferredBackBufferHeight = screenHeight;
+            this.graphics.PreferredBackBufferWidth = screenWidth;
+            player.setPos(new Vector2((player.getPos().X / oldWidth) * screenWidth,
+                          (player.getPos().Y / oldHeight) * screenHeight));
+            viewPort = new Rectangle(0, 0, screenWidth, screenHeight);
+            TileMap.ChangeResolution(viewPort.Width, viewPort.Height);
+            sparker_list.Clear();
+            GenerateLavaSparkers();
+            spawner_list.Clear();
+            GenerateSpawners();
+            this.graphics.ApplyChanges();
         }
 
         /// <summary>
@@ -207,7 +230,7 @@ namespace CodenameHorror
                                               AssetManager.Cherub_Anim_Death };
 
 
-            player = new Player(new AnimManager(playerAnimSet), new Vector2(TileMap.tileSize * TileMap.MapWidth / 2 + 32, TileMap.tileSize * TileMap.MapHeight / 2), 28);
+            player = new Player(new AnimManager(playerAnimSet), new Vector2(TileMap.tileWidth * TileMap.MapWidth / 2 + 32, TileMap.tileHeight * TileMap.MapHeight / 2), 28);
             Living.gameParent = this;
             full_entity_list.Add(player);
             Random rand = new Random();
@@ -233,7 +256,7 @@ namespace CodenameHorror
                         {
                             if (rand.Next() % 8 == 0)
                             {
-                                Sparker sp = new Sparker(20, new Vector2(x * TileMap.tileSize, y * TileMap.tileSize), true,
+                                Sparker sp = new Sparker(20, new Vector2(x * TileMap.tileWidth, y * TileMap.tileHeight), true,
                                     100 + rand.Next() % 20, rand.Next() % 100);
                                 sparker_list.Add(sp);
                             }
@@ -254,7 +277,7 @@ namespace CodenameHorror
                     {
                         if (currentMap.data[x][y][z + 1] == 0x71)
                         {
-                            spawner_list.Add(new MonsterSpawner(new Vector2(x * TileMap.tileSize, y * TileMap.tileSize)));
+                            spawner_list.Add(new MonsterSpawner(new Vector2(x * TileMap.tileWidth, y * TileMap.tileHeight)));
                         }
                     }
                 }
@@ -292,9 +315,9 @@ namespace CodenameHorror
             rune_list.Clear();
             GenerateLavaSparkers();
             GenerateSpawners();
-            int idx = (int)((Math.Abs(p.getPos().X - 32)) / TileMap.tileSize) - 1;
+            int idx = (int)((Math.Abs(p.getPos().X - 32)) / TileMap.tileWidth) - 1;
             if (idx < 0) idx = 0;
-            int idy = (int)((p.getPos().Y) / TileMap.tileSize);
+            int idy = (int)((p.getPos().Y) / TileMap.tileHeight);
             if (idy < 0) idy = 0;
             currentMap.data[idx][idy][2] = 0xff;
             currentMap.data[idx][idy][1] = 0xff;
@@ -402,8 +425,6 @@ namespace CodenameHorror
                     }
                     break;
                 case GameState.Game:
-                    
-
                     for (int i = 0; i < full_entity_list.Count; i++)
                     {
                         //The update code of 0 means this is a routine update (the code is in case an update needs to be called out of this main update loop, such as by another entity or an environmental peice)
@@ -477,7 +498,6 @@ namespace CodenameHorror
 
                     if (player.deathFlag)
                     {
-                        
                         curGameState = GameState.Died;
                     }
 
@@ -503,23 +523,22 @@ namespace CodenameHorror
             switch (curGameState)
             {
                 case GameState.Instructions0:
-                    spriteBatch.Draw(AssetManager.InstructionsScreen0, Vector2.Zero, null, Color.White, 0f, Vector2.Zero, new Vector2(2f, 1.91f), SpriteEffects.None, 0);
+                    spriteBatch.Draw(AssetManager.InstructionsScreen0, viewPort, null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0);
                     break;
                 case GameState.Instructions1:
-                    spriteBatch.Draw(AssetManager.InstructionsScreen1, Vector2.Zero, null, Color.White, 0f, Vector2.Zero, new Vector2(2f, 1.91f), SpriteEffects.None, 0);
+                    spriteBatch.Draw(AssetManager.InstructionsScreen1, viewPort, null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0);
                     break;
                 case GameState.Instructions2:
-                    spriteBatch.Draw(AssetManager.InstructionsScreen2, Vector2.Zero, null, Color.White, 0f, Vector2.Zero, new Vector2(2f, 1.91f), SpriteEffects.None, 0);
+                    spriteBatch.Draw(AssetManager.InstructionsScreen2, viewPort, null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0);
                     break;
                 case GameState.Splash:
-                    spriteBatch.Draw(AssetManager.SplashScreen, Vector2.Zero, null, Color.White, 0f, Vector2.Zero, new Vector2(2f, 1.91f), SpriteEffects.None, 0);
+                    spriteBatch.Draw(AssetManager.SplashScreen, viewPort, null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0);
                     break;
                 case GameState.Died:
-                    spriteBatch.Draw(AssetManager.DeathScreen, Vector2.Zero, null, Color.White, 0f, Vector2.Zero, new Vector2(2f, 1.91f), SpriteEffects.None, 0);
+                    spriteBatch.Draw(AssetManager.DeathScreen, viewPort, null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0);
 
                     break;
                 case GameState.Game:
-                    
                     currentMap.Draw(spriteBatch);
                     HealthBar.Render(spriteBatch, ((Living)player).health);
                     foreach (Rune r in rune_list)
@@ -542,9 +561,6 @@ namespace CodenameHorror
                         s.Draw(spriteBatch);
                     foreach (Sparker s in sparker_list)
                         s.Draw(spriteBatch);
-
-
-                    
                     break;
             }
             spriteBatch.End();

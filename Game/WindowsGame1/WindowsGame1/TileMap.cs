@@ -15,7 +15,8 @@ namespace CodenameHorror
         public const int MapHeight = 20;
         public const int MapWidth = 30;
         public const int MapDepth = 3;
-        public const int tileSize = 48;
+        public static int tileHeight = 48;
+        public static int tileWidth = 48;
 
         public int xLoc;
         public int yLoc;
@@ -57,6 +58,12 @@ namespace CodenameHorror
             return t;
         }
 
+        public static void ChangeResolution(int width, int height)
+        {
+            tileWidth = Game1.viewPort.Width / MapWidth;
+            tileHeight = Game1.viewPort.Height / MapHeight;
+        }
+
         public void Draw(SpriteBatch sb)
         {
             int spX, spY;
@@ -68,7 +75,9 @@ namespace CodenameHorror
                     {
                         spX = data[x][y][z] % 16;
                         spY = data[x][y][z] / 16;
-                        sb.Draw(spriteSheet, new Rectangle(x * tileSize, y * tileSize, tileSize, tileSize),
+                        sb.Draw(spriteSheet, new Rectangle(x * tileWidth,
+                                                           y * tileHeight,
+                                                           tileWidth, tileHeight),
                                 new Rectangle(spX * 18, spY * 18, 18, 18), Color.White);
                     }
                 }

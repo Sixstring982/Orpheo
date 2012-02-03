@@ -109,11 +109,12 @@ namespace CodenameHorror
             
             
             
-            int midY = (int)((this.position.Y - 32) / TileMap.tileSize);
-
+            int midY = (int)((this.position.Y - 32) / TileMap.tileHeight);
+            if (midY < 0) midY = 0;
             this.position.X += newVect.X;
             bool moveX = true;
-            int midX = (int)((this.position.X - 32) / TileMap.tileSize);
+            int midX = (int)((this.position.X - 32) / TileMap.tileWidth);
+            if (midX < 0) midX = 0;
             if (gameParent.currentMap.data[midX][midY][2] != 0xFF)
             {
                 if (gameParent.currentMap.data[midX][midY][2] == 0x78)
@@ -136,10 +137,11 @@ namespace CodenameHorror
                     moveX = false;
             }
             this.position.X -= newVect.X;
-
-            midX = (int)((this.position.X - 32) / TileMap.tileSize);
+            midX = (int)((this.position.X - 32) / TileMap.tileWidth);
             this.position.Y += newVect.Y;
-            midY = (int)((this.position.Y - 32) / TileMap.tileSize);
+            midY = (int)((this.position.Y - 32) / TileMap.tileHeight);
+            if (midY < 0) midY = 0;
+            if (midX < 0) midX = 0;
             if (gameParent.currentMap.data[midX][midY][2] != 0xFF)
             {
                 if (gameParent.currentMap.data[midX][midY][2] == 0x78)
@@ -164,8 +166,10 @@ namespace CodenameHorror
 
             if (moveX) this.position.X += newVect.X;
 
-            midX = (int)((this.position.X - 32) / TileMap.tileSize);
-            midY = (int)((this.position.Y - 32) / TileMap.tileSize);
+            midX = (int)((this.position.X - 32) / TileMap.tileWidth);
+            midY = (int)((this.position.Y - 32) / TileMap.tileHeight);
+            if (midY < 0) midY = 0;
+            if (midX < 0) midX = 0;
             onID = gameParent.currentMap.data[midX][midY][1];
             switch (gameParent.currentMap.data[midX][midY][1]) /*Level Two Switches*/
             {
