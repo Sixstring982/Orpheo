@@ -20,7 +20,7 @@ namespace CodenameHorror
         }
         public override int update(int code)
         {
-            if (Vector2.Distance(Living.gameParent.getPlayer().getPos(), position) < 40)
+            if (Vector2.Distance(new Vector2(Living.gameParent.getPlayer().getPos().X+64, Living.gameParent.getPlayer().getPos().Y+64), position) < 40)
             {
                 Living.gameParent.getPlayer().devour(this);
                 return 1;

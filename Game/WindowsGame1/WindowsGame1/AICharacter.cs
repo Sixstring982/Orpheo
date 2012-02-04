@@ -27,7 +27,7 @@ namespace CodenameHorror
         {
             foreach (Rune r in Living.gameParent.GetRuneList())
             {
-                if (Vector2.Distance(r.getPos(), position) < r.getCollideRadius())
+                if (Vector2.Distance(new Vector2(r.getPos().X+64, r.getPos().Y+64), position) < r.getCollideRadius())
                 {
                     r.activated(this);
                 }

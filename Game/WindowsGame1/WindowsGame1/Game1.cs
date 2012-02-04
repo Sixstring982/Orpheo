@@ -326,6 +326,7 @@ namespace CodenameHorror
             currentMap = TileMap.LoadMap(roomX, roomY, TileMap.Dimension.Overworld);
             ResetLevel();
             GenerateLavaSparkers();
+            soul_list.Clear();
         }
 
         public List<Entity> GetEntityList()

@@ -517,7 +517,7 @@ namespace CodenameHorror
 
 	    public Player(AnimManager manager, Vector2 position, float _collideRadius) : base(manager, position, _collideRadius)
         {
-            health = 100;
+            health = 300;
             RebuildRuneInventory();
             spawnLocation = new Vector2(position.X, position.Y);
         }
